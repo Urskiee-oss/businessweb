@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Jels Kitchen Goodies</title>
+        <link rel="icon" type="image/jpeg" href="assets/favicon.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -12,11 +13,12 @@
     </head>
     <body>
         <header class="top-nav">
-            <div class="brand">Jels Kitchen Goodies</div>
+            <a class="brand" href="#home" aria-label="Jels Kitchen Goodies Home">
+                <img src="assets/favicon.png" alt="Jels Kitchen Goodies logo">
+            </a>
             <nav aria-label="Primary Navigation">
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Products</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact Us</a></li>
                 </ul>
@@ -25,40 +27,81 @@
 
         <main class="main-display" id="home">
             <section class="hero-card">
-                <p class="eyebrow">Artisan Kitchen Excellence</p>
-                <h1>Discover Authentic Homemade Kitchen Goodies</h1>
-                <p>
-                    Premium quality, lovingly crafted kitchen ingredients and products made with the finest ingredients. From spice blends to specialty sauces, we bring authentic flavors to your kitchen.
-                </p>
-                <a class="cta" href="#services">Explore Products</a>
+                <p class="eyebrow">Homebaker Since I 2012</p>
+                <h1>“Where every bite feels like home.”</h1>
             </section>
 
             <section class="cards-grid">
                 <div class="product-card">
-                    <div class="product-image">🌶️</div>
-                    <h3>Spice Blend Mix</h3>
-                    <p class="price">$12.99</p>
+                    <div class="product-image">
+                        <img src="assets/revel-bar.jpg" alt="Revel Bar">
+                    </div>
+                    <h3>Revel Bars</h3>
+                   <p class="price out-of-stock">Out of Stock</p>
                 </div>
 
                 <div class="product-card">
-                    <div class="product-image">🫒</div>
-                    <h3>Herb-Infused Oil</h3>
-                    <p class="price">$18.50</p>
+                    <div class="product-image">
+                        <img src="assets/bananaloaf.jpg" alt="Banana Loaf">
+                    </div>
+                    <h3>Banana Loaf</h3>
+                    <p class="price out-of-stock">Out of Stock</p>
                 </div>
 
                 <div class="product-card">
-                    <div class="product-image">🍯</div>
-                    <h3>Artisan Sauce</h3>
-                    <p class="price">$14.99</p>
+                    <div class="product-image">
+                        <img src="assets/cake.jpg" alt="Cake">
+                    </div>
+                    <h3>Cake</h3>
+                    <p class="price out-of-stock">Out of Stock</p>
                 </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/cupcake.jpg" alt="Cupcake">
+                    </div>
+                    <h3>Cupcake</h3>
+                    <p class="price out-of-stock">Out of Stock</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/macaroons.jpg" alt="Coconut Macaroons">
+                    </div>
+                    <h3>Coconut Macaroons</h3>
+                    <p class="price out-of-stock">Out of Stock</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/bento-cake.jpg" alt="Bento Cake">
+                    </div>
+                    <h3>Bento Cake</h3>
+                    <p class="price out-of-stock">Out of Stock</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="assets/banana-muffin.jpg" alt="Banana Muffin">
+                    </div>
+                    <h3>Banana Muffin</h3>
+                    <p class="price out-of-stock">Out of Stock</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">?</div>
+                    <h3>Comming Soon</h3>
+                    <p class="price">Comming Soon</p>
+                </div>
+
+                
             </section>
         </main>
 
         <footer class="social-nav" aria-label="Social Links">
-            <a href="#" aria-label="Facebook">Facebook</a>
-            <a href="#" aria-label="Instagram">Instagram</a>
-            <a href="#" aria-label="LinkedIn">LinkedIn</a>
-            <a href="#" aria-label="X">X</a>
+            <a href="https://www.facebook.com/jelsktchen" aria-label="Facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/jelskitchen_goodies" aria-label="Instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.x.com/jelsktchen" aria-label="X" target="_blank" rel="noopener noreferrer">X</a>
         </footer>
     </body>
 </html>
