@@ -25,6 +25,9 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
                         <span class="cart-count" id="cartCount">0</span>
                     </button></li>
+                    <li><button class="admin-btn" id="adminBtn" aria-label="Owner Panel">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button></li>
                 </ul>
             </nav>
         </header>
@@ -263,6 +266,111 @@
                 <p>Thank you for your order! We'll contact you shortly to confirm.</p>
                 <p class="order-number">Order #<span id="orderNumber"></span></p>
                 <button class="close-confirmation" id="closeConfirmation">Continue Shopping</button>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">
+            <span class="toast-icon">&#9888;</span>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+
+        <!-- Owner Login Modal -->
+        <div class="admin-login-overlay" id="adminLoginOverlay"></div>
+        <div class="admin-login-modal" id="adminLoginModal">
+            <div class="login-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="1.5"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                <h2>Owner Login</h2>
+            </div>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="ownerPassword">Password</label>
+                    <input type="password" id="ownerPassword" required placeholder="Enter owner password">
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <p class="login-hint">Default password: jelskitchen2024</p>
+            <button class="close-login" id="closeLogin" aria-label="Close">&times;</button>
+        </div>
+
+        <!-- Admin Panel Modal -->
+        <div class="admin-panel-overlay" id="adminPanelOverlay"></div>
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-header">
+                <h2>Owner Panel</h2>
+                <div class="admin-header-actions">
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
+                    <button class="close-admin" id="closeAdmin" aria-label="Close">&times;</button>
+                </div>
+            </div>
+            <div class="admin-content">
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="products">Products</button>
+                    <button class="admin-tab" data-tab="orders">Orders</button>
+                </div>
+
+                <!-- Products Tab -->
+                <div class="tab-content active" id="productsTab">
+                    <button class="add-product-btn" id="addProductBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add New Product
+                    </button>
+                    <div class="products-list" id="productsList"></div>
+                </div>
+
+                <!-- Orders Tab -->
+                <div class="tab-content" id="ordersTab">
+                    <div class="orders-list" id="ordersList">
+                        <p class="no-orders">No orders yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Product Modal -->
+        <div class="product-modal-overlay" id="productModalOverlay"></div>
+        <div class="product-modal" id="productModal">
+            <div class="product-modal-header">
+                <h2 id="productModalTitle">Add New Product</h2>
+                <button class="close-product-modal" id="closeProductModal" aria-label="Close">&times;</button>
+            </div>
+            <form class="product-form" id="productForm">
+                <div class="form-group">
+                    <label for="productName">Product Name *</label>
+                    <input type="text" id="productName" name="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Price ($) *</label>
+                    <input type="number" id="productPrice" name="productPrice" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="productImage">Image Filename (in assets/)</label>
+                    <input type="text" id="productImage" name="productImage" placeholder="e.g., cake.jpg">
+                    <span class="form-hint">Place image file in /assets folder</span>
+                </div>
+                <div class="form-group">
+                    <label for="productStatus">Availability</label>
+                    <select id="productStatus" name="productStatus">
+                        <option value="in-stock">In Stock</option>
+                        <option value="out-of-stock">Out of Stock</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelProductBtn">Cancel</button>
+                    <button type="submit" class="save-btn">Save Product</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div class="confirm-modal" id="confirmModal">
+            <div class="confirm-content">
+                <h3>Delete Product?</h3>
+                <p id="confirmMessage">Are you sure you want to delete this product?</p>
+                <div class="confirm-actions">
+                    <button class="confirm-cancel" id="confirmCancel">Cancel</button>
+                    <button class="confirm-delete" id="confirmDelete">Delete</button>
+                </div>
             </div>
         </div>
     </body>

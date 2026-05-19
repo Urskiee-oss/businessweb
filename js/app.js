@@ -1,6 +1,24 @@
 // Cart State
 let cart = [];
 
+// Default products
+const defaultProducts = [
+    { id: 1, name: 'Revel Bars', price: 4.50, image: 'revel-bar.jpg', stock: 'out-of-stock' },
+    { id: 2, name: 'Banana Loaf', price: 12.00, image: 'bananaloaf.jpg', stock: 'out-of-stock' },
+    { id: 3, name: 'Cake', price: 35.00, image: 'cake.jpg', stock: 'out-of-stock' },
+    { id: 4, name: 'Cupcake', price: 3.50, image: 'cupcake.jpg', stock: 'out-of-stock' },
+    { id: 5, name: 'Coconut Macaroons', price: 2.00, image: 'macaroons.jpg', stock: 'out-of-stock' },
+    { id: 6, name: 'Bento Cake', price: 18.00, image: 'bento-cake.jpg', stock: 'out-of-stock' },
+    { id: 7, name: 'Banana Muffin', price: 3.00, image: 'banana-muffin.jpg', stock: 'out-of-stock' },
+    { id: 8, name: 'Coming Soon', price: 0, image: '', stock: 'coming-soon' }
+];
+
+// Initialize products from localStorage or use defaults
+let products = JSON.parse(localStorage.getItem('jelsProducts')) || [...defaultProducts];
+
+// Initialize orders from localStorage
+let orders = JSON.parse(localStorage.getItem('jelsOrders')) || [];
+
 // DOM Elements
 const cartBtn = document.getElementById('cartBtn');
 const cartDrawer = document.getElementById('cartDrawer');
@@ -26,16 +44,40 @@ const summarySubtotal = document.getElementById('summarySubtotal');
 const summaryTotal = document.getElementById('summaryTotal');
 const deliveryFeeLine = document.getElementById('deliveryFeeLine');
 
+// Admin Elements
+const adminBtn = document.getElementById('adminBtn');
+const adminLoginModal = document.getElementById('adminLoginModal');
+const adminLoginOverlay = document.getElementById('adminLoginOverlay');
+const loginForm = document.getElementById('loginForm');
+const closeLogin = document.getElementById('closeLogin');
+
+const adminPanel = document.getElementById('adminPanel');
+const adminPanelOverlay = document.getElementById('adminPanelOverlay');
+const closeAdmin = document.getElementById('closeAdmin');
+const logoutBtn = document.getElementById('logoutBtn');
+
+const addProductBtn = document.getElementById('addProductBtn');
+const productsList = document.getElementById('productsList');
+const ordersList = document.getElementById('ordersList');
+
+const productModal = document.getElementById('productModal');
+const productModalOverlay = document.getElementById('productModalOverlay');
+const closeProductModal = document.getElementById('closeProductModal');
+const cancelProductBtn = document.getElementById('cancelProductBtn');
+const productForm = document.getElementById('productForm');
+const productModalTitle = document.getElementById('productModalTitle');
+
+const confirmModal = document.getElementById('confirmModal');
+const confirmCancel = document.getElementById('confirmCancel');
+
+let editingProductId = null;
+let deleteProductId = null;
+
 // Product images mapping
-const productImages = {
-    'Revel Bars': 'assets/revel-bar.jpg',
-    'Banana Loaf': 'assets/bananaloaf.jpg',
-    'Cake': 'assets/cake.jpg',
-    'Cupcake': 'assets/cupcake.jpg',
-    'Coconut Macaroons': 'assets/macaroons.jpg',
-    'Bento Cake': 'assets/bento-cake.jpg',
-    'Banana Muffin': 'assets/banana-muffin.jpg'
-};
+const productImages = {};
+products.forEach(p => {
+    if (p.image) productImages[p.name] = `assets/${p.image}`;
+});
 
 // Set minimum pickup date to today
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date().toISOString().split('T')[0];
         pickupDate.setAttribute('min', today);
     }
+    renderProducts();
 });
 
 // Cart Functions
@@ -59,7 +102,48 @@ function closeCartFn() {
     document.body.style.overflow = '';
 }
 
-function addToCart(name, price) {
+// Toast notification for errors
+function showToast(message, type = 'error') {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
+    const toastIcon = toast.querySelector('.toast-icon');
+    toastMessage.textContent = message;
+
+    if (type === 'success') {
+        toast.style.background = '#2e7d32';
+        toast.style.boxShadow = '0 8px 24px rgba(46, 125, 50, 0.4)';
+        toastIcon.innerHTML = '&#10003;';
+    } else {
+        toast.style.background = '#c62828';
+        toast.style.boxShadow = '0 8px 24px rgba(198, 40, 40, 0.4)';
+        toastIcon.innerHTML = '&#9888;';
+    }
+
+    toast.classList.add('active');
+
+    setTimeout(() => {
+        toast.classList.remove('active');
+    }, 3000);
+}
+
+function addToCart(name, price, btnElement) {
+    const product = products.find(p => p.name === name);
+
+    if (!product || product.stock === 'out-of-stock') {
+        showToast(`Sorry, ${name} is currently out of stock!`);
+        return;
+    }
+
+    if (product.stock === 'coming-soon') {
+        showToast(`${name} is not yet available!`);
+        return;
+    }
+
+    if (!price || price === 0) {
+        showToast(`${name} is not available!`);
+        return;
+    }
+
     const existingItem = cart.find(item => item.name === name);
 
     if (existingItem) {
@@ -90,11 +174,9 @@ function updateItemQuantity(name, delta) {
 }
 
 function updateCartUI() {
-    // Update count
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = totalItems;
 
-    // Update cart items
     if (cart.length === 0) {
         cartItems.innerHTML = '<p class="empty-cart-message">Your cart is empty</p>';
         checkoutBtn.disabled = true;
@@ -119,7 +201,6 @@ function updateCartUI() {
         checkoutBtn.disabled = false;
     }
 
-    // Update total
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartTotal.textContent = `$${total.toFixed(2)}`;
 }
@@ -130,7 +211,6 @@ function updateOrderSummary() {
     const deliveryFee = isDelivery ? 5 : 0;
     const total = subtotal + deliveryFee;
 
-    // Update order summary items
     const orderSummaryItems = document.getElementById('orderSummaryItems');
     if (orderSummaryItems) {
         orderSummaryItems.innerHTML = cart.map(item => `
@@ -177,11 +257,207 @@ function closeConfirmationFn() {
     orderConfirmation.classList.remove('active');
     checkoutOverlay.classList.remove('active');
     document.body.style.overflow = '';
-    // Clear cart
     cart = [];
     updateCartUI();
-    // Reset form
     checkoutForm.reset();
+}
+
+// Admin Login Functions
+function openLoginModal() {
+    adminLoginModal.classList.add('active');
+    adminLoginOverlay.classList.add('active');
+    document.getElementById('ownerPassword').value = '';
+}
+
+function closeLoginModal() {
+    adminLoginModal.classList.remove('active');
+    adminLoginOverlay.classList.remove('active');
+}
+
+function openAdminPanel() {
+    adminLoginModal.classList.remove('active');
+    adminLoginOverlay.classList.remove('active');
+    adminPanel.classList.add('active');
+    adminPanelOverlay.classList.add('active');
+    renderProductsList();
+    renderOrdersList();
+}
+
+function closeAdminPanel() {
+    adminPanel.classList.remove('active');
+    adminPanelOverlay.classList.remove('active');
+}
+
+// Product Management
+function renderProductsList() {
+    const currentUserProducts = JSON.parse(localStorage.getItem('jelsProducts')) || products;
+
+    productsList.innerHTML = currentUserProducts.map(product => `
+        <div class="product-item">
+            <div class="product-item-image">
+                <img src="${product.image ? 'assets/' + product.image : 'assets/favicon.png'}" alt="${product.name}">
+            </div>
+            <div class="product-item-details">
+                <p class="product-item-name">${product.name}</p>
+                <p class="product-item-price">$${product.price.toFixed(2)}</p>
+                <span class="product-item-status ${product.stock}">
+                    ${product.stock === 'in-stock' ? 'In Stock' : product.stock === 'out-of-stock' ? 'Out of Stock' : 'Coming Soon'}
+                </span>
+            </div>
+            <div class="product-item-actions">
+                <button class="edit-btn" onclick="editProduct(${product.id})">Edit</button>
+                <button class="delete-btn" onclick="confirmDeleteProduct(${product.id})">Delete</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function openProductModal(product = null) {
+    productModal.classList.add('active');
+    productModalOverlay.classList.add('active');
+
+    if (product) {
+        editingProductId = product.id;
+        productModalTitle.textContent = 'Edit Product';
+        document.getElementById('productName').value = product.name;
+        document.getElementById('productPrice').value = product.price;
+        document.getElementById('productImage').value = product.image || '';
+        document.getElementById('productStatus').value = product.stock;
+    } else {
+        editingProductId = null;
+        productModalTitle.textContent = 'Add New Product';
+        productForm.reset();
+    }
+}
+
+function closeProductModal() {
+    productModal.classList.remove('active');
+    productModalOverlay.classList.remove('active');
+    productForm.reset();
+    editingProductId = null;
+}
+
+function saveProduct(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('productName').value.trim();
+    const price = parseFloat(document.getElementById('productPrice').value);
+    const image = document.getElementById('productImage').value.trim();
+    const stock = document.getElementById('productStatus').value;
+
+    if (!name || isNaN(price)) {
+        showToast('Please fill in all required fields');
+        return;
+    }
+
+    // Refresh products from localStorage
+    let currentProducts = JSON.parse(localStorage.getItem('jelsProducts')) || [...defaultProducts];
+
+    if (editingProductId) {
+        const index = currentProducts.findIndex(p => p.id === editingProductId);
+        if (index !== -1) {
+            currentProducts[index] = { ...currentProducts[index], name, price, image, stock };
+        }
+    } else {
+        const newId = Math.max(...currentProducts.map(p => p.id), 0) + 1;
+        currentProducts.push({ id: newId, name, price, image, stock });
+    }
+
+    localStorage.setItem('jelsProducts', JSON.stringify(currentProducts));
+    products = currentProducts;
+
+    // Update product images mapping
+    if (image) productImages[name] = `assets/${image}`;
+
+    closeProductModal();
+    renderProductsList();
+    renderProducts();
+    showToast(editingProductId ? 'Product updated!' : 'Product added!', 'success');
+}
+
+function editProduct(id) {
+    const product = products.find(p => p.id === id);
+    if (product) {
+        openProductModal(product);
+    }
+}
+
+function confirmDeleteProduct(id) {
+    deleteProductId = id;
+    const product = products.find(p => p.id === id);
+    document.getElementById('confirmMessage').textContent = `Are you sure you want to delete "${product.name}"?`;
+    confirmModal.classList.add('active');
+}
+
+function deleteProduct() {
+    if (deleteProductId) {
+        let currentProducts = JSON.parse(localStorage.getItem('jelsProducts')) || [...defaultProducts];
+        currentProducts = currentProducts.filter(p => p.id !== deleteProductId);
+        localStorage.setItem('jelsProducts', JSON.stringify(currentProducts));
+        products = currentProducts;
+
+        confirmModal.classList.remove('active');
+        renderProductsList();
+        renderProducts();
+        showToast('Product deleted!', 'success');
+        deleteProductId = null;
+    }
+}
+
+function renderProducts() {
+    const cardsGrid = document.querySelector('.cards-grid');
+    const currentProducts = JSON.parse(localStorage.getItem('jelsProducts')) || products;
+
+    // Keep the grid but update products
+    cardsGrid.innerHTML = currentProducts.map(product => {
+        const isInStock = product.stock === 'in-stock';
+        const isComingSoon = product.stock === 'coming-soon' || product.price === 0;
+
+        return `
+            <div class="product-card" data-name="${product.name}" data-price="${product.price}">
+                <div class="product-image">
+                    ${product.image ? `<img src="assets/${product.image}" alt="${product.name}">` : '?'}
+                </div>
+                <h3>${product.name}</h3>
+                <p class="price ${!isInStock && !isComingSoon ? 'out-of-stock' : ''}">
+                    ${isComingSoon ? 'Coming Soon' : `$${product.price.toFixed(2)}`}
+                </p>
+                ${!isComingSoon ? `<button class="add-to-cart-btn" data-name="${product.name}" data-price="${product.price}">Add to Cart</button>` : ''}
+            </div>
+        `;
+    }).join('');
+
+    // Re-attach event listeners
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const name = btn.dataset.name;
+            const price = btn.dataset.price;
+            addToCart(name, price, btn);
+        });
+    });
+}
+
+// Orders
+function renderOrdersList() {
+    const currentOrders = JSON.parse(localStorage.getItem('jelsOrders')) || [];
+
+    if (currentOrders.length === 0) {
+        ordersList.innerHTML = '<p class="no-orders">No orders yet</p>';
+        return;
+    }
+
+    ordersList.innerHTML = currentOrders.reverse().map(order => `
+        <div class="order-item">
+            <div class="order-item-header">
+                <span class="order-item-number">Order #${order.orderNumber}</span>
+                <span class="order-item-date">${new Date(order.date).toLocaleDateString()}</span>
+            </div>
+            <p class="order-item-customer">${order.customer.name} | ${order.customer.phone}</p>
+            <p class="order-item-items">${order.items.map(i => `${i.name} x${i.quantity}`).join(', ')}</p>
+            <p class="order-item-total">Total: $${order.total.toFixed(2)}</p>
+        </div>
+    `).join('');
 }
 
 // Event Listeners
@@ -192,14 +468,11 @@ checkoutBtn?.addEventListener('click', openCheckout);
 
 closeCheckout?.addEventListener('click', closeCheckoutFn);
 checkoutOverlay?.addEventListener('click', (e) => {
-    if (e.target === checkoutOverlay) {
-        closeCheckoutFn();
-    }
+    if (e.target === checkoutOverlay) closeCheckoutFn();
 });
 
 closeConfirmation?.addEventListener('click', closeConfirmationFn);
 
-// Order type toggle
 orderTypeRadios?.forEach(radio => {
     radio.addEventListener('change', () => {
         if (radio.value === 'delivery') {
@@ -217,23 +490,18 @@ orderTypeRadios?.forEach(radio => {
     });
 });
 
-// Add to cart buttons
-document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const name = btn.dataset.name;
-        const price = btn.dataset.price;
-        addToCart(name, price);
-    });
-});
-
-// Form submission
 checkoutForm?.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // In a real app, you'd send this data to a server
     const formData = new FormData(checkoutForm);
-    const orderData = {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const isDelivery = formData.get('orderType') === 'delivery';
+    const total = subtotal + (isDelivery ? 5 : 0);
+
+    // Create new order
+    const newOrder = {
+        orderNumber: Math.floor(100000 + Math.random() * 900000),
+        date: new Date().toISOString(),
         customer: {
             name: formData.get('customerName'),
             email: formData.get('customerEmail'),
@@ -244,23 +512,83 @@ checkoutForm?.addEventListener('submit', (e) => {
             date: formData.get('pickupDate'),
             time: formData.get('pickupTime')
         },
-        delivery: formData.get('orderType') === 'delivery' ? {
+        delivery: isDelivery ? {
             street: formData.get('deliveryStreet'),
             city: formData.get('deliveryCity'),
             zip: formData.get('deliveryZip')
         } : null,
         payment: formData.get('paymentMethod'),
         instructions: formData.get('specialInstructions'),
-        items: cart,
-        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) +
-            (formData.get('orderType') === 'delivery' ? 5 : 0)
+        items: [...cart],
+        subtotal: subtotal,
+        deliveryFee: isDelivery ? 5 : 0,
+        total: total
     };
 
-    console.log('Order placed:', orderData);
+    // Save order
+    let currentOrders = JSON.parse(localStorage.getItem('jelsOrders')) || [];
+    currentOrders.push(newOrder);
+    localStorage.setItem('jelsOrders', JSON.stringify(currentOrders));
+    orders = currentOrders;
 
     closeCheckoutFn();
     showOrderConfirmation();
 });
+
+// Admin Event Listeners
+adminBtn?.addEventListener('click', openLoginModal);
+closeLogin?.addEventListener('click', closeLoginModal);
+adminLoginOverlay?.addEventListener('click', closeLoginModal);
+
+loginForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const password = document.getElementById('ownerPassword').value;
+
+    // Simple password check (in production, use proper auth)
+    if (password === 'jelskitchen2024') {
+        localStorage.setItem('jelsAdminLoggedIn', 'true');
+        openAdminPanel();
+    } else {
+        showToast('Incorrect password');
+    }
+});
+
+logoutBtn?.addEventListener('click', () => {
+    localStorage.removeItem('jelsAdminLoggedIn');
+    closeAdminPanel();
+});
+
+closeAdmin?.addEventListener('click', closeAdminPanel);
+adminPanelOverlay?.addEventListener('click', closeAdminPanel);
+
+// Admin tabs
+document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab + 'Tab').classList.add('active');
+
+        if (tab.dataset.tab === 'orders') {
+            renderOrdersList();
+        }
+    });
+});
+
+// Product modal events
+addProductBtn?.addEventListener('click', () => openProductModal());
+closeProductModal?.addEventListener('click', closeProductModal);
+cancelProductBtn?.addEventListener('click', closeProductModal);
+productModalOverlay?.addEventListener('click', closeProductModal);
+productForm?.addEventListener('submit', saveProduct);
+
+// Confirm modal events
+confirmCancel?.addEventListener('click', () => {
+    confirmModal.classList.remove('active');
+    deleteProductId = null;
+});
+
+document.getElementById('confirmDelete')?.addEventListener('click', deleteProduct);
 
 // Close modals on escape
 document.addEventListener('keydown', (e) => {
@@ -271,6 +599,19 @@ document.addEventListener('keydown', (e) => {
             closeCheckoutFn();
         } else if (cartDrawer.classList.contains('active')) {
             closeCartFn();
+        } else if (productModal.classList.contains('active')) {
+            closeProductModal();
+        } else if (confirmModal.classList.contains('active')) {
+            confirmModal.classList.remove('active');
+        } else if (adminPanel.classList.contains('active')) {
+            closeAdminPanel();
+        } else if (adminLoginModal.classList.contains('active')) {
+            closeLoginModal();
         }
     }
 });
+
+// Check if admin was previously logged in
+if (localStorage.getItem('jelsAdminLoggedIn') === 'true') {
+    setTimeout(() => openAdminPanel(), 100);
+}

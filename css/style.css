@@ -776,3 +776,623 @@ body {
 .close-confirmation:hover {
 	background: var(--brand-deep);
 }
+
+/* Toast Notification */
+.toast {
+	position: fixed;
+	bottom: 100px;
+	left: 50%;
+	transform: translateX(-50%) translateY(20px);
+	background: #c62828;
+	color: white;
+	padding: 1rem 1.5rem;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	box-shadow: 0 8px 24px rgba(198, 40, 40, 0.4);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease, visibility 300ms ease, transform 300ms ease;
+	z-index: 400;
+	max-width: 90%;
+	text-align: center;
+}
+
+.toast.active {
+	opacity: 1;
+	visibility: visible;
+	transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon {
+	font-size: 1.4rem;
+}
+
+.toast-message {
+	font-weight: 600;
+	font-size: 0.95rem;
+}
+
+/* Admin Button */
+.admin-btn {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0.4rem;
+	border-radius: 999px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 160ms ease;
+	color: var(--ink);
+}
+
+.admin-btn:hover {
+	background-color: rgba(11, 110, 79, 0.1);
+}
+
+/* Admin Login Modal */
+.admin-login-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease, visibility 300ms ease;
+	z-index: 500;
+}
+
+.admin-login-overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.admin-login-modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.9);
+	width: min(380px, 90%);
+	background: white;
+	border-radius: 16px;
+	padding: 2rem;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease, visibility 300ms ease, transform 300ms ease;
+	z-index: 501;
+}
+
+.admin-login-modal.active {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.login-header {
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+.login-header svg {
+	margin-bottom: 0.75rem;
+}
+
+.login-header h2 {
+	margin: 0;
+	color: var(--ink);
+}
+
+.login-form .form-group {
+	margin-bottom: 1rem;
+}
+
+.login-form .form-group label {
+	display: block;
+	font-weight: 500;
+	margin-bottom: 0.4rem;
+}
+
+.login-form .form-group input {
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	font-family: inherit;
+	font-size: 1rem;
+}
+
+.login-form .form-group input:focus {
+	outline: none;
+	border-color: var(--brand);
+}
+
+.login-btn {
+	width: 100%;
+	padding: 0.85rem;
+	background: linear-gradient(125deg, var(--brand), var(--brand-deep));
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.login-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 18px rgba(11, 110, 79, 0.3);
+}
+
+.login-hint {
+	text-align: center;
+	color: #888;
+	font-size: 0.85rem;
+	margin-top: 1rem;
+}
+
+.close-login {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: transparent;
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+	color: #888;
+}
+
+/* Admin Panel */
+.admin-panel-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease, visibility 300ms ease;
+	z-index: 600;
+}
+
+.admin-panel-overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.admin-panel {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.9);
+	width: min(800px, 95%);
+	max-height: 85vh;
+	background: var(--bg-1);
+	border-radius: 16px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease, visibility 300ms ease, transform 300ms ease;
+	z-index: 601;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.admin-panel.active {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.admin-header {
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid var(--line);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: white;
+}
+
+.admin-header h2 {
+	margin: 0;
+}
+
+.admin-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.logout-btn {
+	background: #f5f5f5;
+	border: 1px solid var(--line);
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 500;
+	transition: background-color 160ms ease;
+}
+
+.logout-btn:hover {
+	background: #e0e0e0;
+}
+
+.close-admin {
+	background: transparent;
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+	color: #888;
+}
+
+.admin-content {
+	flex: 1;
+	overflow-y: auto;
+	padding: 1.5rem;
+}
+
+.admin-tabs {
+	display: flex;
+	gap: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.admin-tab {
+	padding: 0.75rem 1.5rem;
+	border: 1px solid var(--line);
+	background: white;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 600;
+	transition: all 160ms ease;
+}
+
+.admin-tab.active {
+	background: var(--brand);
+	color: white;
+	border-color: var(--brand);
+}
+
+.tab-content {
+	display: none;
+}
+
+.tab-content.active {
+	display: block;
+}
+
+.add-product-btn {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1.25rem;
+	background: linear-gradient(125deg, var(--brand), var(--brand-deep));
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-weight: 600;
+	cursor: pointer;
+	margin-bottom: 1rem;
+	transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.add-product-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 18px rgba(11, 110, 79, 0.3);
+}
+
+.products-list {
+	display: grid;
+	gap: 1rem;
+}
+
+.product-item {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	background: white;
+	border-radius: 12px;
+	border: 1px solid var(--line);
+}
+
+.product-item-image {
+	width: 70px;
+	height: 70px;
+	border-radius: 8px;
+	overflow: hidden;
+	background: var(--bg-2);
+	flex-shrink: 0;
+}
+
+.product-item-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.product-item-details {
+	flex: 1;
+}
+
+.product-item-name {
+	font-weight: 700;
+	font-size: 1.1rem;
+	margin: 0 0 0.25rem;
+}
+
+.product-item-price {
+	color: var(--brand);
+	font-weight: 600;
+	margin: 0 0 0.25rem;
+}
+
+.product-item-status {
+	font-size: 0.85rem;
+	padding: 0.2rem 0.6rem;
+	border-radius: 999px;
+	display: inline-block;
+}
+
+.product-item-status.in-stock {
+	background: rgba(11, 110, 79, 0.1);
+	color: var(--brand-deep);
+}
+
+.product-item-status.out-of-stock {
+	background: rgba(198, 40, 40, 0.1);
+	color: #c62828;
+}
+
+.product-item-actions {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.product-item-actions button {
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--line);
+	background: white;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 500;
+	transition: all 160ms ease;
+}
+
+.product-item-actions .edit-btn:hover {
+	background: #e3f2fd;
+	border-color: #2196f3;
+	color: #1565c0;
+}
+
+.product-item-actions .delete-btn:hover {
+	background: #ffebee;
+	border-color: #f44336;
+	color: #c62828;
+}
+
+/* Orders List */
+.no-orders {
+	text-align: center;
+	color: #888;
+	padding: 2rem;
+}
+
+.order-item {
+	background: white;
+	border-radius: 12px;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--line);
+}
+
+.order-item-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.75rem;
+}
+
+.order-item-number {
+	font-weight: 700;
+	color: var(--brand);
+}
+
+.order-item-date {
+	font-size: 0.85rem;
+	color: #888;
+}
+
+.order-item-customer {
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+}
+
+.order-item-items {
+	font-size: 0.9rem;
+	color: #555;
+	margin-bottom: 0.5rem;
+}
+
+.order-item-total {
+	font-weight: 700;
+	text-align: right;
+}
+
+/* Product Modal */
+.product-modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease, visibility 300ms ease;
+	z-index: 700;
+}
+
+.product-modal-overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.product-modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.9);
+	width: min(450px, 95%);
+	background: white;
+	border-radius: 16px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease, visibility 300ms ease, transform 300ms ease;
+	z-index: 701;
+	overflow: hidden;
+}
+
+.product-modal.active {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+.product-modal-header {
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid var(--line);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.product-modal-header h2 {
+	margin: 0;
+}
+
+.close-product-modal {
+	background: transparent;
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+	color: #888;
+}
+
+.product-form {
+	padding: 1.5rem;
+}
+
+.product-form .form-group {
+	margin-bottom: 1rem;
+}
+
+.product-form .form-group label {
+	display: block;
+	font-weight: 500;
+	margin-bottom: 0.4rem;
+}
+
+.product-form .form-group input,
+.product-form .form-group select {
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	font-family: inherit;
+	font-size: 1rem;
+}
+
+.product-form .form-group input:focus,
+.product-form .form-group select:focus {
+	outline: none;
+	border-color: var(--brand);
+}
+
+.form-hint {
+	display: block;
+	font-size: 0.8rem;
+	color: #888;
+	margin-top: 0.25rem;
+}
+
+.form-actions {
+	display: flex;
+	gap: 0.75rem;
+	justify-content: flex-end;
+	margin-top: 1.5rem;
+}
+
+.cancel-btn {
+	padding: 0.75rem 1.25rem;
+	border: 1px solid var(--line);
+	background: white;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.save-btn {
+	padding: 0.75rem 1.5rem;
+	background: linear-gradient(125deg, var(--brand), var(--brand-deep));
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+/* Confirm Modal */
+.confirm-modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease, visibility 300ms ease;
+	z-index: 800;
+}
+
+.confirm-modal.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.confirm-content {
+	background: white;
+	padding: 1.5rem;
+	border-radius: 12px;
+	max-width: 360px;
+	width: 90%;
+}
+
+.confirm-content h3 {
+	margin: 0 0 0.75rem;
+}
+
+.confirm-content p {
+	margin: 0 0 1.25rem;
+	color: #555;
+}
+
+.confirm-actions {
+	display: flex;
+	gap: 0.75rem;
+	justify-content: flex-end;
+}
+
+.confirm-cancel {
+	padding: 0.6rem 1rem;
+	border: 1px solid var(--line);
+	background: white;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.confirm-delete {
+	padding: 0.6rem 1rem;
+	background: #c62828;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
