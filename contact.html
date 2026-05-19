@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Contact Us - Jels Kitchen Goodies</title>
+        <link rel="icon" type="image/jpeg" href="assets/favicon.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/contact.css">
+    </head>
+    <body>
+        <header class="top-nav">
+            <a class="brand" href="index.html" aria-label="Jels Kitchen Goodies Home">
+                <img src="assets/favicon.png" alt="Jels Kitchen Goodies logo">
+            </a>
+            <nav aria-label="Primary Navigation">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="products.html">Products</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="contact-page">
+            <section class="contact-hero">
+                <h1>We'd Love to Hear From You</h1>
+                <p>Have a suggestion, question, or just want to say hi? Drop us a message!</p>
+            </section>
+
+            <div class="contact-layout">
+                <section class="contact-form-section">
+                    <div class="form-card">
+                        <h2>Send Us a Message</h2>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="contactName">Your Name *</label>
+                                <input type="text" id="contactName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email Address *</label>
+                                <input type="email" id="contactEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactType">Message Type *</label>
+                                <select id="contactType" name="type" required>
+                                    <option value="">Select one...</option>
+                                    <option value="suggestion">Suggestion</option>
+                                    <option value="compliment">Compliment</option>
+                                    <option value="complaint">Complaint</option>
+                                    <option value="question">Question</option>
+                                    <option value="custom-order">Custom Order Inquiry</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactSubject">Subject *</label>
+                                <input type="text" id="contactSubject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage">Your Message *</label>
+                                <textarea id="contactMessage" name="message" rows="5" required placeholder="Tell us what's on your mind..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How do I place an order?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Simply browse our products, add items to your cart, and proceed to checkout. Choose your preferred pickup date and time, and we'll have your order ready!</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Do you offer delivery?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes! We offer delivery for a flat fee of $5.00 within our service area. Select "Delivery" at checkout and enter your address.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How far in advance should I order?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>We recommend ordering at least 2-3 days in advance for most items. For custom or decorated cakes, please allow 5-7 days. Last-minute orders? Give us a call and we'll do our best!</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Can I request custom flavors or decorations?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Absolutely! We love creating custom treats. Use the contact form or reach out via social media to discuss your vision. Additional fees may apply for complex custom work.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Do you accommodate allergies or dietary restrictions?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>We can make some items without certain allergens. Please mention any allergies in your order notes, and we'll do our best to accommodate. Note: our kitchen handles nuts and dairy.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>What are your pickup hours?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>You can pick up orders from 9:00 AM to 5:00 PM, Monday through Saturday. Select your preferred time slot during checkout.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>What payment methods do you accept?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>We accept cash and card payments upon pickup/delivery. Online card payments are also available at checkout.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Do you offer catering or events?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes! We cater events of all sizes. Contact us with your event details and we'll create a custom quote for your needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">&#128222;</div>
+                    <h3>Call Us</h3>
+                    <p>Have an urgent question? Give us a call!</p>
+                    <a href="tel:+1234567890" class="info-link">(123) 456-7890</a>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">&#128231;</div>
+                    <h3>Email</h3>
+                    <p>Prefer email? Reach us anytime.</p>
+                    <a href="mailto:hello@jelskitchen.com" class="info-link">hello@jelskitchen.com</a>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">&#128205;</div>
+                    <h3>Follow Us</h3>
+                    <p>Stay updated on new treats!</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/jelskitchen_goodies" target="_blank">Instagram</a>
+                        <a href="https://www.facebook.com/jelsktchen" target="_blank">Facebook</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Success Toast -->
+        <div class="success-toast" id="successToast">
+            <span class="toast-check">&#10003;</span>
+            <span>Message sent successfully!</span>
+        </div>
+
+        <footer class="social-nav" aria-label="Social Links">
+            <a href="https://www.facebook.com/jelsktchen" aria-label="Facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/jelskitchen_goodies" aria-label="Instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.x.com/jelsktchen" aria-label="X" target="_blank" rel="noopener noreferrer">X</a>
+        </footer>
+
+        <script>
+            // FAQ Accordion
+            document.querySelectorAll('.faq-question').forEach(button => {
+                button.addEventListener('click', () => {
+                    const item = button.parentElement;
+                    const isOpen = item.classList.contains('open');
+
+                    // Close all
+                    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+                    // Toggle current
+                    if (!isOpen) {
+                        item.classList.add('open');
+                    }
+                });
+            });
+
+            // Contact Form
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+
+                // Save to localStorage (messages would go to a server in production)
+                let messages = JSON.parse(localStorage.getItem('jelsMessages')) || [];
+                messages.push({
+                    ...data,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('jelsMessages', JSON.stringify(messages));
+
+                // Show success toast
+                const toast = document.getElementById('successToast');
+                toast.classList.add('show');
+
+                // Reset form
+                this.reset();
+
+                // Hide toast after 3 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            });
+        </script>
+    </body>
+</html>

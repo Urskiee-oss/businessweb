@@ -82,19 +82,23 @@ products.forEach(p => {
 // Set minimum pickup date to today
 document.addEventListener('DOMContentLoaded', () => {
     const pickupDate = document.getElementById('pickupDate');
+    const floatingBtn = document.getElementById('floatingOwnerBtn');
+
     if (pickupDate) {
         const today = new Date().toISOString().split('T')[0];
         pickupDate.setAttribute('min', today);
     }
     renderProducts();
 
-    // Logo Intro Animation
+    // Logo Intro Animation - hide floating button during intro
     const logoIntro = document.getElementById('logoIntro');
     if (logoIntro) {
+        if (floatingBtn) floatingBtn.style.display = 'none';
         setTimeout(() => {
             logoIntro.classList.add('hidden');
             setTimeout(() => {
                 logoIntro.remove();
+                if (floatingBtn) floatingBtn.style.display = 'flex';
             }, 800);
         }, 3000);
     }

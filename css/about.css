@@ -1,0 +1,239 @@
+.about-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 104px 1.25rem 110px;
+    gap: 2rem;
+}
+
+.about-hero {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.about-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    box-shadow: 0 8px 24px rgba(11, 110, 79, 0.15);
+    margin-bottom: 1.5rem;
+}
+
+.about-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0;
+}
+
+.about-tagline {
+    color: var(--brand);
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+.about-content {
+    width: min(900px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.about-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.about-card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.about-card h2 {
+    font-size: 1.6rem;
+    margin: 0 0 1rem;
+    color: var(--brand-deep);
+}
+
+.about-card p {
+    color: #555;
+    line-height: 1.7;
+    margin: 0 0 1rem;
+}
+
+.about-card p:last-child {
+    margin-bottom: 0;
+}
+
+.about-values h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 0 0 1.5rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+.value-item {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.value-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(11, 110, 79, 0.12);
+}
+
+.value-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.value-item h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem;
+}
+
+.value-item p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.about-timeline h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 0 0 1.5rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--brand), var(--brand-deep));
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem;
+    top: 0.25rem;
+    width: 14px;
+    height: 14px;
+    background: var(--brand);
+    border-radius: 50%;
+    border: 3px solid var(--bg-1);
+}
+
+.timeline-year {
+    font-weight: 700;
+    color: var(--brand);
+    font-size: 1.1rem;
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.timeline-content h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+}
+
+.timeline-content p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.about-cta {
+    background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    color: white;
+}
+
+.about-cta h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+}
+
+.about-cta p {
+    margin: 0 0 1.5rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    background: white;
+    color: var(--brand-deep);
+    padding: 0.85rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 700px) {
+    .about-page {
+        padding-top: 130px;
+    }
+
+    .about-card {
+        padding: 1.5rem;
+    }
+
+    .timeline {
+        padding-left: 1.5rem;
+    }
+
+    .timeline::before {
+        left: 0;
+    }
+
+    .timeline-item::before {
+        left: -1.85rem;
+    }
+}
