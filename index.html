@@ -21,6 +21,10 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact Us</a></li>
+                    <li><button class="cart-btn" id="cartBtn" aria-label="Shopping Cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button></li>
                 </ul>
             </nav>
         </header>
@@ -32,69 +36,75 @@
             </section>
 
             <section class="cards-grid">
-                <div class="product-card">
+                <div class="product-card" data-name="Revel Bars" data-price="4.50">
                     <div class="product-image">
                         <img src="assets/revel-bar.jpg" alt="Revel Bar">
                     </div>
                     <h3>Revel Bars</h3>
                    <p class="price out-of-stock">Out of Stock</p>
+                   <button class="add-to-cart-btn" data-name="Revel Bars" data-price="4.50">Add to Cart</button>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-name="Banana Loaf" data-price="12.00">
                     <div class="product-image">
                         <img src="assets/bananaloaf.jpg" alt="Banana Loaf">
                     </div>
                     <h3>Banana Loaf</h3>
                     <p class="price out-of-stock">Out of Stock</p>
+                    <button class="add-to-cart-btn" data-name="Banana Loaf" data-price="12.00">Add to Cart</button>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-name="Cake" data-price="35.00">
                     <div class="product-image">
                         <img src="assets/cake.jpg" alt="Cake">
                     </div>
                     <h3>Cake</h3>
                     <p class="price out-of-stock">Out of Stock</p>
+                    <button class="add-to-cart-btn" data-name="Cake" data-price="35.00">Add to Cart</button>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-name="Cupcake" data-price="3.50">
                     <div class="product-image">
                         <img src="assets/cupcake.jpg" alt="Cupcake">
                     </div>
                     <h3>Cupcake</h3>
                     <p class="price out-of-stock">Out of Stock</p>
+                    <button class="add-to-cart-btn" data-name="Cupcake" data-price="3.50">Add to Cart</button>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-name="Coconut Macaroons" data-price="2.00">
                     <div class="product-image">
                         <img src="assets/macaroons.jpg" alt="Coconut Macaroons">
                     </div>
                     <h3>Coconut Macaroons</h3>
                     <p class="price out-of-stock">Out of Stock</p>
+                    <button class="add-to-cart-btn" data-name="Coconut Macaroons" data-price="2.00">Add to Cart</button>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-name="Bento Cake" data-price="18.00">
                     <div class="product-image">
                         <img src="assets/bento-cake.jpg" alt="Bento Cake">
                     </div>
                     <h3>Bento Cake</h3>
                     <p class="price out-of-stock">Out of Stock</p>
+                    <button class="add-to-cart-btn" data-name="Bento Cake" data-price="18.00">Add to Cart</button>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-name="Banana Muffin" data-price="3.00">
                     <div class="product-image">
                         <img src="assets/banana-muffin.jpg" alt="Banana Muffin">
                     </div>
                     <h3>Banana Muffin</h3>
                     <p class="price out-of-stock">Out of Stock</p>
+                    <button class="add-to-cart-btn" data-name="Banana Muffin" data-price="3.00">Add to Cart</button>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-name="Coming Soon" data-price="0">
                     <div class="product-image">?</div>
-                    <h3>Comming Soon</h3>
-                    <p class="price">Comming Soon</p>
+                    <h3>Coming Soon</h3>
+                    <p class="price">Coming Soon</p>
                 </div>
 
-                
             </section>
         </main>
 
@@ -103,5 +113,157 @@
             <a href="https://www.instagram.com/jelskitchen_goodies" aria-label="Instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
             <a href="https://www.x.com/jelsktchen" aria-label="X" target="_blank" rel="noopener noreferrer">X</a>
         </footer>
+
+        <!-- Cart Drawer -->
+        <div class="cart-overlay" id="cartOverlay"></div>
+        <div class="cart-drawer" id="cartDrawer">
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <button class="close-cart" id="closeCart" aria-label="Close cart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart-message">Your cart is empty</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+                <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Checkout Modal -->
+        <div class="checkout-overlay" id="checkoutOverlay"></div>
+        <div class="checkout-modal" id="checkoutModal">
+            <div class="checkout-header">
+                <h2>Checkout</h2>
+                <button class="close-checkout" id="closeCheckout" aria-label="Close checkout">&times;</button>
+            </div>
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-section">
+                    <h3>Contact Information</h3>
+                    <div class="form-group">
+                        <label for="customerName">Full Name *</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerEmail">Email *</label>
+                        <input type="email" id="customerEmail" name="customerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number *</label>
+                        <input type="tel" id="customerPhone" name="customerPhone" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Order Type</h3>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="orderType" value="pickup" checked>
+                            <span>Pickup</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="orderType" value="delivery">
+                            <span>Delivery (+$5.00)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section delivery-address" id="deliveryAddress" style="display: none;">
+                    <h3>Delivery Address</h3>
+                    <div class="form-group">
+                        <label for="deliveryStreet">Street Address *</label>
+                        <input type="text" id="deliveryStreet" name="deliveryStreet">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="deliveryCity">City *</label>
+                            <input type="text" id="deliveryCity" name="deliveryCity">
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryZip">ZIP Code *</label>
+                            <input type="text" id="deliveryZip" name="deliveryZip">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Pickup Information</h3>
+                    <div class="form-group">
+                        <label for="pickupDate">Preferred Pickup Date *</label>
+                        <input type="date" id="pickupDate" name="pickupDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickupTime">Preferred Pickup Time *</label>
+                        <select id="pickupTime" name="pickupTime" required>
+                            <option value="">Select a time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                            <option value="17:00">5:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Payment Method</h3>
+                    <div class="radio-group payment-options">
+                        <label class="radio-label">
+                            <input type="radio" name="paymentMethod" value="cash" checked>
+                            <span>Cash on Pickup/Delivery</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="paymentMethod" value="card">
+                            <span>Pay Now (Card)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Special Instructions</h3>
+                    <div class="form-group">
+                        <label for="specialInstructions">Any allergies or special requests?</label>
+                        <textarea id="specialInstructions" name="specialInstructions" rows="3" placeholder="e.g., nut-free, extra frosting, etc."></textarea>
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div id="orderSummaryItems"></div>
+                    <div class="summary-line">
+                        <span>Subtotal:</span>
+                        <span id="summarySubtotal">$0.00</span>
+                    </div>
+                    <div class="summary-line" id="deliveryFeeLine" style="display: none;">
+                        <span>Delivery Fee:</span>
+                        <span>$5.00</span>
+                    </div>
+                    <div class="summary-line total">
+                        <span>Total:</span>
+                        <span id="summaryTotal">$0.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="place-order-btn">Place Order</button>
+            </form>
+        </div>
+
+        <!-- Order Confirmation Modal -->
+        <div class="order-confirmation" id="orderConfirmation">
+            <div class="confirmation-content">
+                <div class="confirmation-icon">&#10003;</div>
+                <h2>Order Placed!</h2>
+                <p>Thank you for your order! We'll contact you shortly to confirm.</p>
+                <p class="order-number">Order #<span id="orderNumber"></span></p>
+                <button class="close-confirmation" id="closeConfirmation">Continue Shopping</button>
+            </div>
+        </div>
     </body>
 </html>
