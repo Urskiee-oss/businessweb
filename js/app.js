@@ -62,7 +62,7 @@ const ordersList = document.getElementById('ordersList');
 
 const productModal = document.getElementById('productModal');
 const productModalOverlay = document.getElementById('productModalOverlay');
-const closeProductModal = document.getElementById('closeProductModal');
+const closeProductModalBtn = document.getElementById('closeProductModal');
 const cancelProductBtn = document.getElementById('cancelProductBtn');
 const productForm = document.getElementById('productForm');
 const productModalTitle = document.getElementById('productModalTitle');
@@ -87,6 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
         pickupDate.setAttribute('min', today);
     }
     renderProducts();
+
+    // Logo Intro Animation
+    const logoIntro = document.getElementById('logoIntro');
+    if (logoIntro) {
+        setTimeout(() => {
+            logoIntro.classList.add('hidden');
+            setTimeout(() => {
+                logoIntro.remove();
+            }, 800);
+        }, 3000);
+    }
 });
 
 // Cart Functions
@@ -536,9 +547,19 @@ checkoutForm?.addEventListener('submit', (e) => {
 });
 
 // Admin Event Listeners
-adminBtn?.addEventListener('click', openLoginModal);
-closeLogin?.addEventListener('click', closeLoginModal);
-adminLoginOverlay?.addEventListener('click', closeLoginModal);
+if (adminBtn) {
+    adminBtn.addEventListener('click', openLoginModal);
+    console.log('Admin button listener attached');
+} else {
+    console.error('Admin button not found!');
+}
+
+if (closeLogin) {
+    closeLogin.addEventListener('click', closeLoginModal);
+}
+if (adminLoginOverlay) {
+    adminLoginOverlay.addEventListener('click', closeLoginModal);
+}
 
 loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -577,7 +598,7 @@ document.querySelectorAll('.admin-tab').forEach(tab => {
 
 // Product modal events
 addProductBtn?.addEventListener('click', () => openProductModal());
-closeProductModal?.addEventListener('click', closeProductModal);
+closeProductModalBtn?.addEventListener('click', closeProductModal);
 cancelProductBtn?.addEventListener('click', closeProductModal);
 productModalOverlay?.addEventListener('click', closeProductModal);
 productForm?.addEventListener('submit', saveProduct);
