@@ -7,7 +7,7 @@
         <link rel="icon" type="image/jpeg" href="assets/favicon.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
         <script src="js/app.js" defer></script>
     </head>
@@ -27,7 +27,7 @@
         </div>
 
         <header class="top-nav">
-            <a class="brand" href="#home" aria-label="Jels Kitchen Goodies Home">
+            <a class="brand" href="index.html" aria-label="Jels Kitchen Goodies Home">
                 <img src="assets/favicon.png" alt="Jels Kitchen Goodies logo">
             </a>
             <nav aria-label="Primary Navigation">
@@ -49,14 +49,136 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
         </button>
 
-        <main class="main-display" id="home">
-            <section class="hero-card">
-                <p class="eyebrow">Homebaker Since 2012</p>
-                <h1>Where Every Bite Feels Like Home</h1>
-                <p class="hero-subtitle">Handcrafted baked goods made fresh daily with love</p>
-                <div class="hero-cta">
-                    <a href="products.html" class="cta-button primary">View Our Products</a>
-                    <a href="about.html" class="cta-button secondary">Our Story</a>
+        <main>
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <img src="assets/favicon.png" alt="Jels Kitchen Goodies" class="hero-logo">
+                    <p class="hero-eyebrow">Homebaker Since 2012</p>
+                    <h1 class="hero-title">Where Every Bite<br><em>Feels Like Home</em></h1>
+                    <p class="hero-subtitle">Handcrafted baked goods made fresh daily with love, using recipes passed down through generations.</p>
+                    <div class="hero-actions">
+                        <a href="products.html" class="btn-primary">
+                            <span>Explore Our Treats</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                        <a href="about.html" class="btn-secondary">Our Story</a>
+                    </div>
+                </div>
+                <div class="hero-decoration">
+                    <div class="deco-circle deco-1"></div>
+                    <div class="deco-circle deco-2"></div>
+                    <div class="deco-circle deco-3"></div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section class="features-section">
+                <div class="container">
+                    <h2 class="section-title">What Makes Us Special</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                            </div>
+                            <h3>Fresh Every Day</h3>
+                            <p>Baked fresh each morning. We never use preservatives or pre-made mixes — just real ingredients, real love.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                            </div>
+                            <h3>Made With Love</h3>
+                            <p>Every treat is handcrafted with care and attention. You can taste the difference that love makes.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <h3>Family Recipes</h3>
+                            <p>Secret family recipes perfected over decades, bringing authentic homemade flavors to every bite.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                            </div>
+                            <h3>Quality First</h3>
+                            <p>We source the finest ingredients — real butter, fresh eggs, premium chocolate. Quality you can trust.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="featured-section">
+                <div class="container">
+                    <h2 class="section-title">Customer Favorites</h2>
+                    <p class="section-subtitle">Our most loved treats, baked to perfection</p>
+                    <div class="featured-grid">
+                        <div class="featured-item">
+                            <div class="featured-image">
+                                <img src="assets/cake.jpg" alt="Custom Cakes">
+                            </div>
+                            <span class="featured-tag">Bestseller</span>
+                            <h3>Custom Cakes</h3>
+                            <p>Perfect for celebrations</p>
+                        </div>
+                        <div class="featured-item">
+                            <div class="featured-image">
+                                <img src="assets/bananaloaf.jpg" alt="Banana Loaf">
+                            </div>
+                            <span class="featured-tag">Popular</span>
+                            <h3>Banana Loaf</h3>
+                            <p>Moist & flavorful</p>
+                        </div>
+                        <div class="featured-item">
+                            <div class="featured-image">
+                                <img src="assets/cupcake.jpg" alt="Cupcakes">
+                            </div>
+                            <span class="featured-tag">Favorite</span>
+                            <h3>Cupcakes</h3>
+                            <p>Individually wrapped</p>
+                        </div>
+                        <div class="featured-item">
+                            <div class="featured-image">
+                                <img src="assets/bento-cake.jpg" alt="Bento Cakes">
+                            </div>
+                            <span class="featured-tag">Trending</span>
+                            <h3>Bento Cakes</h3>
+                            <p>Perfect portions</p>
+                        </div>
+                    </div>
+                    <a href="products.html" class="view-all-btn">View All Products</a>
+                </div>
+            </section>
+
+            <!-- Testimonial Section -->
+            <section class="testimonial-section">
+                <div class="container-narrow">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"</div>
+                        <blockquote>
+                            The banana loaf is the best I've ever had — moist, flavorful, and tastes exactly like what grandma used to make. We've been ordering from Jels for every family gathering!
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <img src="assets/favicon.png" alt="Happy Customer" class="testimonial-avatar">
+                            <div>
+                                <strong>Satisfied Customer</strong>
+                                <span>Local Resident</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="container">
+                    <div class="cta-content">
+                        <h2>Ready to Taste the Difference?</h2>
+                        <p>Order your favorites today and discover why our community has been loving Jels Kitchen Goodies for over a decade.</p>
+                        <a href="products.html" class="btn-cta">Order Now</a>
+                    </div>
                 </div>
             </section>
         </main>

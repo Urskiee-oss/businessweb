@@ -421,6 +421,8 @@ function deleteProduct() {
 
 function renderProducts() {
     const cardsGrid = document.querySelector('.cards-grid');
+    if (!cardsGrid) return;
+
     const currentProducts = JSON.parse(localStorage.getItem('jelsProducts')) || products;
 
     // Keep the grid but update products
