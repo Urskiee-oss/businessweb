@@ -90,20 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     renderProducts();
 
-    // Logo Intro Animation - hide floating button during intro
-    const logoIntro = document.getElementById('logoIntro');
-    if (logoIntro) {
-        if (floatingBtn) floatingBtn.style.display = 'none';
-        setTimeout(() => {
-            logoIntro.classList.add('hidden');
-            setTimeout(() => {
-                logoIntro.remove();
-                if (floatingBtn) floatingBtn.style.display = 'flex';
-            }, 800);
-        }, 3000);
-    }
-});
-
 // Cart Functions
 function openCart() {
     cartDrawer.classList.add('active');
