@@ -45,7 +45,7 @@ const summaryTotal = document.getElementById('summaryTotal');
 const deliveryFeeLine = document.getElementById('deliveryFeeLine');
 
 // Admin Elements
-const adminBtn = document.getElementById('adminBtn');
+const adminBtn = document.getElementById('floatingOwnerBtn');
 const adminLoginModal = document.getElementById('adminLoginModal');
 const adminLoginOverlay = document.getElementById('adminLoginOverlay');
 const loginForm = document.getElementById('loginForm');
@@ -82,13 +82,13 @@ products.forEach(p => {
 // Set minimum pickup date to today
 document.addEventListener('DOMContentLoaded', () => {
     const pickupDate = document.getElementById('pickupDate');
-    const floatingBtn = document.getElementById('floatingOwnerBtn');
 
     if (pickupDate) {
         const today = new Date().toISOString().split('T')[0];
         pickupDate.setAttribute('min', today);
     }
     renderProducts();
+});
 
 // Cart Functions
 function openCart() {
@@ -625,6 +625,3 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Check if admin was previously logged in
-if (localStorage.getItem('jelsAdminLoggedIn') === 'true') {
-    setTimeout(() => openAdminPanel(), 100);
-}
